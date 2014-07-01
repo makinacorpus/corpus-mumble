@@ -3,6 +3,7 @@
 {% set data = cfg.data %}
 {% set db = cfg.data.db %}
 
+{% if data.ui %}
 {{cfg.name}}-buildout:
   file.managed:
     - name: {{cfg.project_root}}/salt.cfg
@@ -24,3 +25,6 @@
       - file: {{cfg.name}}-buildout
     - user: {{cfg.user}}
     - group: {{cfg.group}}
+{%else%}
+noop: {mc_proxy.hook: []}
+{% endif %}

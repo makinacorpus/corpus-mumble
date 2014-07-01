@@ -2,6 +2,7 @@
 {% set data = cfg.data %}
 {% set scfg = salt['mc_utils.json_dump'](cfg) %}
 
+{% if data.ui %}
 {{cfg.name}}-config:
   file.managed:
     - name: {{cfg.project_root}}/src/mumble-django/pyweb/saltsettings.py
@@ -69,3 +70,6 @@ superuser-{{cfg.name}}-{{admin}}:
       - file: superuser-{{cfg.name}}-{{admin}}
 {%endfor %}
 {%endfor %}
+{%else%}
+noop: {mc_proxy.hook: []}
+{% endif %}

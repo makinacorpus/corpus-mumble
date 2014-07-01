@@ -5,6 +5,7 @@
 {% set data = cfg.data %}
 {% set scfg = salt['mc_utils.json_dump'](cfg) %}
 
+{% if data.ui %}
 include:
   - makina-states.services.http.nginx
   - makina-states.services.monitoring.circus
@@ -34,3 +35,6 @@ include:
                      vh_top_source=data.nginx_upstreams,
                      vh_content_source=data.nginx_vhost,
                      cfg=cfg)}}
+{%else%}
+noop: {mc_proxy.hook: []}
+{% endif %}

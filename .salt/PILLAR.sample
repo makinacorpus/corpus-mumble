@@ -18,6 +18,7 @@ makina-projects.projectname:
   data:
     WSGI: dwsgi:application
     nginx_upstreams: salt://makina-projects/{name}/files/nginx.upstreams.conf
+    ui: false
     nginx_vhost: salt://makina-projects/{name}/files/nginx.content.conf
     workers: 2
     host: 127.0.0.1
